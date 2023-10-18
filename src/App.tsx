@@ -1,13 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "./components/ui/checkbox";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from "./components/ui/accordion";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
+
+const checkboxClass = "flex items-center gap-2";
 
 function App() {
   const numbers = useQuery(api.myFunctions.listNumbers, { count: 10 });
@@ -37,50 +33,55 @@ function App() {
           ? "Click the button!"
           : numbers?.join(", ") ?? "..."}
       </p> */}
-      <Accordion type="multiple">
-        <AccordionItem value="dashboard">
-          <AccordionTrigger>
-            <Checkbox id="dashboard" />
-            <label htmlFor="dashboard">Use the Convex Dashboard</label>
-          </AccordionTrigger>
-          <AccordionContent>
-            Visit{" "}
-            <a
-              className="font-medium text-primary underline underline-offset-4"
-              target="_blank"
-              href="https://dashboard.convex.dev/"
-            >
-              dashboard.convex.dev
-            </a>{" "}
-            to view & edit your project and data
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
-      <p>
-        Edit{" "}
-        <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
-          convex/myFunctions.ts
-        </code>{" "}
-        to change your backend
-      </p>
-      <p>
-        Edit{" "}
-        <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
-          src/App.tsx
-        </code>{" "}
-        to change your frontend
-      </p>
-      <p>
-        Check out the{" "}
-        <a
-          className="font-medium text-primary underline underline-offset-4"
-          target="_blank"
-          href="https://docs.convex.dev/home"
-        >
-          Convex docs
-        </a>{" "}
-        to learn more
-      </p>
+      <div className={checkboxClass}>
+        <Checkbox id="dashboard" />
+        <label htmlFor="dashboard">
+          Visit{" "}
+          <a
+            className="font-medium text-primary underline underline-offset-4"
+            target="_blank"
+            href="https://dashboard.convex.dev/"
+          >
+            dashboard.convex.dev
+          </a>{" "}
+          to view & edit your data
+        </label>
+      </div>
+      <div className={checkboxClass}>
+        <Checkbox id="backend" />
+        <label htmlFor="backend">
+          Edit{" "}
+          <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
+            convex/myFunctions.ts
+          </code>{" "}
+          to change your backend
+        </label>
+      </div>
+
+      <div className={checkboxClass}>
+        <Checkbox id="frontend" />
+        <label htmlFor="frontend">
+          Edit{" "}
+          <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
+            src/App.tsx
+          </code>{" "}
+          to change your frontend
+        </label>
+      </div>
+      <div className={checkboxClass}>
+        <Checkbox id="docs" />
+        <label htmlFor="docs">
+          Check out the{" "}
+          <a
+            className="font-medium text-primary underline underline-offset-4"
+            target="_blank"
+            href="https://docs.convex.dev/home"
+          >
+            Convex docs
+          </a>{" "}
+          to learn more
+        </label>
+      </div>
     </main>
   );
 }
