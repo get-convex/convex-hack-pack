@@ -2,49 +2,38 @@ import { useAction, useMutation, useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "./components/ui/input";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 function App() {
+  const [newIdea, setNewIdea] = useState("");
+  const [includeRandom, setIncludeRandom] = useState(true);
+
   const ideas = useQuery(api.myFunctions.listIdeas);
   const saveIdea = useMutation(api.myFunctions.saveIdea);
-  const fetchIdea = useAction(api.myFunctions.fetchRandomIdea);
-
-  const [newIdea, setNewIdea] = useState("");
+  const generateIdea = useAction(api.myFunctions.fetchRandomIdea);
 
   return (
     <>
       <main className="container max-w-2xl flex flex-col gap-8">
-        <h1 className="text-4xl font-extrabold my-8 text-center">
-          Get Hacking with Convex
+        <h1 className="text-3xl font-extrabold mt-8 text-center">
+          Get hacking with Convex
         </h1>
 
-        <h2>So many app ideas, so little time!</h2>
-
-        <Button
-          onClick={async () => {
-            await fetchIdea();
-          }}
-        >
-          Generate a random app idea
-        </Button>
-
-        <ul className="list-disc">
-          {ideas?.map(({ idea }, i) => (
-            <li key={i}>{idea}</li>
-          ))}
-        </ul>
+        <h2 className="text-center">Let's brainstorm apps to build!</h2>
 
         <div className="flex gap-2">
           <Input
             type="text"
             value={newIdea}
             onChange={(event) => setNewIdea(event.target.value)}
-            placeholder="Add your own app idea here"
+            placeholder="Type your app idea here"
           />
           <Button
             disabled={!newIdea}
             onClick={async () => {
-              await saveIdea({ idea: newIdea });
+              await saveIdea({ idea: newIdea, random: false });
               setNewIdea("");
             }}
             className="min-w-fit"
@@ -52,12 +41,48 @@ function App() {
             Save idea
           </Button>
         </div>
+
+        <div className="flex justify-between items-center">
+          <Button
+            onClick={async () => {
+              await generateIdea();
+            }}
+          >
+            Generate a random app idea
+          </Button>
+
+          <div className="flex gap-2">
+            <Checkbox
+              id="show-random"
+              checked={includeRandom}
+              onCheckedChange={() => setIncludeRandom(!includeRandom)}
+            />
+            <Label htmlFor="show-random">Include random ideas</Label>
+          </div>
+        </div>
+
+        <ul>
+          {ideas?.map((document, i) => (
+            <li key={i}>
+              {document.random ? "🤖 " : "💡 "}
+              {document.idea}
+            </li>
+          ))}
+        </ul>
       </main>
-      <footer className="text-center text-xs mt-10">
-        Built with Convex, React, Vite, and TS - Random app ideas thanks to{" "}
-        <a target="_blank" href="https://appideagenerator.com/">
-          appideagenerator.com
-        </a>
+      <footer className="text-center text-xs mb-5 absolute bottom-0 w-full">
+        <p>
+          Built with <a href="https://convex.dev">Convex</a>,{" "}
+          <a href="https://www.typescriptlang.org">TypeScript</a>,{" "}
+          <a href="https://react.dev">React</a>, and{" "}
+          <a href="https://vitejs.dev">Vite</a>
+        </p>
+        <p>
+          Random app ideas thanks to{" "}
+          <a target="_blank" href="https://appideagenerator.com/">
+            appideagenerator.com
+          </a>
+        </p>
       </footer>
     </>
   );
