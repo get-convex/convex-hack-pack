@@ -1,18 +1,54 @@
-# Convex + TypeScript + ESLint + Vite + React + Tailwind + shadcn/ui
+# Convex Hack Pack
 
-This template provides a minimal setup to get Convex working, with TypeScript,
-ESLint and React using [Vite](https://vitejs.dev/).
+Hello, hackers!
+Welcome to Convex, a full-featured backend platform you can use to
+rapidly prototype any hackathon app you can think of!
 
-Start by editing `convex/myFunctions.ts` and interact with your React app.
+This repository is your starting point for getting hacking with Convex. It includes:
 
-See Convex docs at https://docs.convex.dev/home
+- A simple demo Convex app to help you learn the basics
+- Companion exercises for the intro workshop
+- A comprehensive list of further reading links & resources (below)
 
-## Setting up
+## Before you begin
 
-```
-npm create convex@latest -t react-vite-shadcn
-```
+- Sign up for a free Convex account at [convex.dev](https://convex.dev)
+- [highly recommended] Sign up for a [Github](https://github.com) account if you don't have one already
+- Get your development environment set up:
+  - Make sure you have [git](https://github.com/git-guides/install-git) installed, or install it if needed
+  - Use [NVM](https://github.com/nvm-sh/nvm#about) to install [Node.js](https://nodejs.dev/en/) & [npm](https://www.npmjs.com/), if you don't have them already
+    ```
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+    ```
+- [optional] Read up on the technologies we'll be using:
+  - [JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript) and [TypeScript](https://www.typescriptlang.org/) programming languages
+  - [React](https://react.dev/) JS/TS frontend framework
+  - [Vite](https://vitejs.dev/) JS/TS build & development tool
+  - and of course, [Convex](https://docs.convex.dev)!
 
+## Install the hack pack
+
+- Download a local copy of this repository from Github using `git`:
+
+  ```
+  git clone https://github.com/vakila/convex-hack-pack.git
+  ```
+
+  (Note: if you prefer, you can also clone the repo with the [Github CLI](https://cli.github.com/) or [download a ZIP file](https://github.com/vakila/convex-hack-pack/archive/refs/heads/main.zip) of the contents)
+
+- Install the project dependencies:
+
+  ```
+  cd convex-hack-pack
+  npm install
+  ```
+
+- Start the development server to run the demo app:
+  ```
+  npm run dev
+  ```
+
+##
 
 # What is Convex?
 
