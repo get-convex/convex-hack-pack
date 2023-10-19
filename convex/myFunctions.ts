@@ -7,11 +7,11 @@ import { api } from "./_generated/api";
 
 // You can read data from the database via a query function:
 export const listIdeas = query({
-  // Validators for arguments. (In this case, we have no arguments.)
+  // Validators for arguments.
   args: {},
 
   // Query function implementation.
-  handler: async (ctx) => {
+  handler: async (ctx, args) => {
     //// Read the database as many times as you need here.
     //// See https://docs.convex.dev/database/reading-data.
     return await ctx.db.query("ideas").collect();
@@ -23,6 +23,7 @@ export const saveIdea = mutation({
   // Validators for arguments.
   args: {
     idea: v.string(),
+    random: v.boolean(),
   },
 
   // Mutation function implementation.
@@ -32,7 +33,7 @@ export const saveIdea = mutation({
     //// See https://docs.convex.dev/database/writing-data.
 
     // Optionally, capture the ID of the newly created document
-    const id = await ctx.db.insert("ideas", { idea: args.idea });
+    const id = await ctx.db.insert("ideas", args);
 
     // Optionally, return a value from your mutation.
     return id;
@@ -52,7 +53,10 @@ export const fetchRandomIdea = action({
     const idea = await response.text();
 
     // //// Write or query data by running Convex mutations/queries from within an action
-    await ctx.runMutation(api.myFunctions.saveIdea, { idea: idea.trim() });
+    await ctx.runMutation(api.myFunctions.saveIdea, {
+      idea: idea.trim(),
+      random: true,
+    });
 
     // Optionally, return a value from your action
     return idea;
