@@ -1,92 +1,65 @@
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "./components/ui/checkbox";
-import { useMutation, useQuery } from "convex/react";
+import { useAction, useMutation, useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
-
-const checkboxClass = "flex items-center gap-2";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "./components/ui/input";
 
 function App() {
-  const steps = useQuery(api.myFunctions.listSteps);
-  const getHacking = useMutation(api.myFunctions.getHacking);
+  const ideas = useQuery(api.myFunctions.listIdeas);
+  const saveIdea = useMutation(api.myFunctions.saveIdea);
+  const fetchIdea = useAction(api.myFunctions.fetchRandomIdea);
+
+  const [newIdea, setNewIdea] = useState("");
 
   return (
-    <main className="container max-w-2xl flex flex-col gap-8">
-      <h1 className="text-4xl font-extrabold my-8 text-center">
-        Get Hacking with Convex
-      </h1>
-      {steps && steps.length === 0 ? (
-        <>
-          <p>Ready to start building rapid prototypes with Convex?</p>
-          <p>
-            <Button
-              onClick={() => {
-                getHacking();
-              }}
-            >
-              Let's go!
-            </Button>
-          </p>
-        </>
-      ) : (
-        <>
-          {steps?.map(({ name, label, done }) => (
-            <div className={checkboxClass}>
-              <Checkbox id={name} checked={done} />
-              <label htmlFor={name}>{label}</label>
-            </div>
-          ))}
-          {/* <div className={checkboxClass}>
-            <Checkbox id="dashboard" />
-            <label htmlFor="dashboard">
-              Visit{" "}
-              <a
-                className="font-medium text-primary underline underline-offset-4"
-                target="_blank"
-                href="https://dashboard.convex.dev/"
-              >
-                dashboard.convex.dev
-              </a>{" "}
-              to view & edit your data
-            </label>
-          </div>
-          <div className={checkboxClass}>
-            <Checkbox id="backend" />
-            <label htmlFor="backend">
-              Edit{" "}
-              <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
-                convex/myFunctions.ts
-              </code>{" "}
-              to change your backend
-            </label>
-          </div>
+    <>
+      <main className="container max-w-2xl flex flex-col gap-8">
+        <h1 className="text-4xl font-extrabold my-8 text-center">
+          Get Hacking with Convex
+        </h1>
 
-          <div className={checkboxClass}>
-            <Checkbox id="frontend" />
-            <label htmlFor="frontend">
-              Edit{" "}
-              <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
-                src/App.tsx
-              </code>{" "}
-              to change your frontend
-            </label>
-          </div>
-          <div className={checkboxClass}>
-            <Checkbox id="docs" />
-            <label htmlFor="docs">
-              Check out the{" "}
-              <a
-                className="font-medium text-primary underline underline-offset-4"
-                target="_blank"
-                href="https://docs.convex.dev/home"
-              >
-                Convex docs
-              </a>{" "}
-              to learn more
-            </label>
-          </div> */}
-        </>
-      )}
-    </main>
+        <h2>So many app ideas, so little time!</h2>
+
+        <Button
+          onClick={async () => {
+            await fetchIdea();
+          }}
+        >
+          Generate a random app idea
+        </Button>
+
+        <ul className="list-disc">
+          {ideas?.map(({ idea }, i) => (
+            <li key={i}>{idea}</li>
+          ))}
+        </ul>
+
+        <div className="flex gap-2">
+          <Input
+            type="text"
+            value={newIdea}
+            onChange={(event) => setNewIdea(event.target.value)}
+            placeholder="Add your own app idea here"
+          />
+          <Button
+            disabled={!newIdea}
+            onClick={async () => {
+              await saveIdea({ idea: newIdea });
+              setNewIdea("");
+            }}
+            className="min-w-fit"
+          >
+            Save idea
+          </Button>
+        </div>
+      </main>
+      <footer className="text-center text-xs mt-10">
+        Built with Convex, React, Vite, and TS - Random app ideas thanks to{" "}
+        <a target="_blank" href="https://appideagenerator.com/">
+          appideagenerator.com
+        </a>
+      </footer>
+    </>
   );
 }
 
