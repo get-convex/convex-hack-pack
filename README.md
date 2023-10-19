@@ -43,14 +43,19 @@ This repository is your starting point for getting hacking with Convex. It inclu
   npm install
   ```
 
-- Start the development server to run the demo app:
+- Run the following command, then follow the prompts to configure a new project in your Convex account and start the development server for the demo site:
+
   ```
   npm run dev
   ```
 
-##
+- You should see [localhost:5173](http://localhost:5173) automatically open in your web browser - you're ready to get hacking!
+
+---
 
 # What is Convex?
+
+![Diagram of how a Convex backend fits in to your fullstack app](https://docs.convex.dev/assets/images/TutorialFigure0-47bd164e06a7396ba005666938c5005b.png)
 
 [Convex](https://convex.dev) is a hosted backend platform with a
 built-in database that lets you write your
