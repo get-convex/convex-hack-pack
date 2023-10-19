@@ -60,7 +60,71 @@ This repository is your starting point for getting hacking with Convex. It inclu
   npm run dev
   ```
 
-- You should see [localhost:5173](http://localhost:5173) automatically open in your web browser - you're ready to get hacking!
+- You should see the demo app automatically open in your web browser (if not, navigate to [localhost:5173](http://localhost:5173))
+- In the demo app, type in a new app idea and click "Save", and click the "Generate a random app idea" button, and you should see the ideas appear!
+
+## Exercises
+
+### Exercise 1: Update your data
+
+- In the browser, navigate to the `convex-hack-pack` project in your [Convex dashboard](https://dashboard.convex.dev) (if it didn't open automatically) - you'll be taken to the 'Data' tab where you should see the `ideas` table and any documents inside it
+- Edit data:
+  - Double-click in the 'idea' field of any document and edit the text
+  - Back in your demo app, you'll see the text has automatically updated!
+- Add new data:
+  - In the dashboard `ideas` table, click the "Add documents" button on the top right
+  - In the document editor that opens, type a new app idea to fill out the `idea` property (e.g. `"A brainstorming app for developers"` - in quotes, because it's a string value)
+  - Click "Save" to save the new document
+  - In both the dashboard and the demo app, you should now see your new idea!
+
+### Exercise 2: Update your backend
+
+The "Include random ideas" checkbox in the demo app doesn't work! Let's fix that.
+
+- Update your `listIdeas` function:
+
+  - In your code editor, open `convex/myFunctions.ts`
+  - In the `listIdeas` query function, add an additional argument named `includeRandom` to the `args` object, whose value is a boolean (`v.boolean()`). The `args` object should now look like this:
+
+    ```js
+    args: {
+        includeRandom: v.boolean()
+    },
+    ```
+
+  - In the `handler` function, add an `if` conditional based on the value of `args.includeRandom`: if true, return the same query results as before, but if false, return results filtered by the value of the `random` field, like so:
+
+    ```js
+    handler: async (ctx, args) => {
+      if (args.includeRandom) {
+        return await ctx.db.query("ideas").collect(); // Returns all documents in the 'ideas' table
+      } else {
+        return await ctx.db
+         .query("ideas")
+         .filter((q) => q.neq(q.field("random"), true)) // Only returns documents whose 'random' field is not equal to `true`
+         .collect();
+      }
+    },
+    ```
+
+  - Save the `myFunctions.ts` file, and in the terminal where you have `npm run dev` running, you should see a log line that says "Convex functions ready!" (this means your new function code has been successfully deployed)
+
+- Test out your updated function
+  - Go to your [Convex dashboard](https://dashboard.convex.dev), navigate to the "Functions" tab (`</>`) and open `myFunctions:listIdeas`. You should now see the new version of your code there!
+  - Click the "Run function" button to try out your new function in the dashboard
+  - In the "Arguments" panel, edit the value of `includeRandom` and verify that you see the correct results in the "Query outcome" panel!
+
+### Exercise 3: Update your frontend
+
+Oh no, we broke the frontend! Now that we changed the `listIdeas` function, when visiting [localhost:5173](http://localhost:5173) you'll see a whole lot of nothing. Let's fix it and get our ideas back!
+
+- In your code editor, open `src/App.tsx`
+- In the `App` function, find the line near the top where `ideas` is defined using the `useQuery()` hook to call the `api.myFunctions.listIdeas` query function
+- The `useQuery` hook can take an optional second argument, an `args` object that matches the `args` validator of the given query function. Update the call to `useQuery()` to pass `{ includeRandom }` as the second argument, like so:
+  ```js
+  const ideas = useQuery(api.myFunctions.listIdeas, { includeRandom });
+  ```
+- Now, not only are the ideas displaying properly, but when you (un)check the "Include random ideas" checkbox you should see the results update accordingly!
 
 ---
 
