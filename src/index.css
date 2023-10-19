@@ -4,6 +4,10 @@
 
 @layer base {
   :root {
+    --convex-yellow: #f3b01c;
+    --convex-red: #ee342f;
+    --convex-purple: #8d2676;
+
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
 
@@ -33,6 +37,34 @@
     --ring: 240 10% 3.9%;
 
     --radius: 0.5rem;
+
+    font-size: 22px;
+  }
+
+  a {
+    color: var(--convex-yellow);
+  }
+
+  .convex-yellow {
+    color: var(--convex-yellow);
+  }
+  .convex-red {
+    color: var(--convex-red);
+  }
+  .convex-purple {
+    color: var(--convex-purple);
+  }
+
+  @media screen and (min-width: 800px) {
+    :root {
+      font-size: 26px;
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    :root {
+      font-size: 30px;
+    }
   }
 
   @media (prefers-color-scheme: dark) {
