@@ -1,7 +1,7 @@
 # Convex Hack Pack
 
 Hello, hackers!
-Welcome to Convex, a full-featured backend platform you can use to
+Welcome to [Convex](https://convex.dev), a full-featured backend platform you can use to
 rapidly prototype any hackathon app you can think of!
 
 ## So you want to build an app, ASAP
