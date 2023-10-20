@@ -4,11 +4,25 @@ Hello, hackers!
 Welcome to Convex, a full-featured backend platform you can use to
 rapidly prototype any hackathon app you can think of!
 
+## So you want to build an app, ASAP
+
+If you're building an app for a hackathon, there's no time to waste!
+Convex is the perfect partner for hackers on a deadline because:
+
+- you get a cloud-hosted database & serverless backend for free
+- your frontend clients get automatic, realtime data updates
+- you can flexibly change your database schema as your product evolves
+- you get file storage, text- and vector-based search, cron jobs, and lots more out of the box
+
+Whatever your idea is, Convex can help you make it happen!
+
+## What is this hack pack?
+
 This repository is your starting point for getting hacking with Convex. It includes:
 
-- A simple demo Convex app to help you learn the basics
-- Companion exercises for the intro workshop
-- A comprehensive list of further reading links & resources (below)
+- A simple Convex demo app to demonstrate the basics
+- Hands-on exercises to get you started (below)
+- Lots of further reading links & resources to keep you going (below)
 
 ## Before you begin
 
@@ -63,9 +77,11 @@ This repository is your starting point for getting hacking with Convex. It inclu
 - You should see the demo app automatically open in your web browser (if not, navigate to [localhost:5173](http://localhost:5173))
 - In the demo app, type in a new app idea and click "Save", and click the "Generate a random app idea" button, and you should see the ideas appear!
 
-## Exercises
+---
 
-### Exercise 1: Update your data
+# Exercises
+
+## Exercise 1: Update your data
 
 - In the browser, navigate to the `convex-hack-pack` project in your [Convex dashboard](https://dashboard.convex.dev) (if it didn't open automatically) - you'll be taken to the 'Data' tab where you should see the `ideas` table and any documents inside it
 - Edit data:
@@ -77,7 +93,7 @@ This repository is your starting point for getting hacking with Convex. It inclu
   - Click "Save" to save the new document
   - In both the dashboard and the demo app, you should now see your new idea!
 
-### Exercise 2: Update your backend
+## Exercise 2: Update your backend
 
 The "Include random ideas" checkbox in the demo app doesn't work! Let's fix that.
 
@@ -114,7 +130,7 @@ The "Include random ideas" checkbox in the demo app doesn't work! Let's fix that
   - Click the "Run function" button to try out your new function in the dashboard
   - In the "Arguments" panel, edit the value of `includeRandom` and verify that you see the correct results in the "Query outcome" panel!
 
-### Exercise 3: Update your frontend
+## Exercise 3: Update your frontend
 
 Oh no, we broke the frontend! Now that we changed the `listIdeas` function, when visiting [localhost:5173](http://localhost:5173) you'll see a whole lot of nothing. Let's fix it and get our ideas back!
 
@@ -125,6 +141,45 @@ Oh no, we broke the frontend! Now that we changed the `listIdeas` function, when
   const ideas = useQuery(api.myFunctions.listIdeas, { includeRandom });
   ```
 - Now, not only are the ideas displaying properly, but when you (un)check the "Include random ideas" checkbox you should see the results update accordingly!
+
+---
+
+# Next steps
+
+Now that you've grokked the basics, you're ready to get building!
+
+## Create a new app from a starter template
+
+You can quickly spin up a new Convex app with the command:
+
+```
+npm create convex@latest
+```
+
+This will install the [`create-convex`](https://www.npmjs.com/package/create-convex) bootstrapper tool, which will then ask you a series of questions to configure your starter code. Walk through the prompts and the instructions that follow.
+
+## Explore the Convex platform and everything it can do
+
+Convex offers lots of functionality, so you can pick and choose the parts of the platform you need to build the app of your dreams!
+
+Here are some resources to help get you building:
+
+- For a more in-depth structured intro to Convex, take the [guided tour](https://docs.convex.dev/get-started)
+- The [Convex docs](https://docs.convex.dev/home) are a comprehensive reference of platform features and how to use them
+- [Stack](https://stack.convex.dev/) is Convex's developer learning portal, with tons of articles & videos on best practices and how-tos
+- You can ask questions, get help, and share your Convex projects in the community [Discord](https://www.convex.dev/community)
+- [Convex Search](https://search.convex.dev/) lets you search across all of the above to find the info you need!
+- The [template gallery](https://www.convex.dev/templates) has tons of sample apps for different tech stacks and use cases
+
+And in case you want to jump right in to implementing common app features, here are some resouces on how to:
+
+- Model [relationships](https://docs.convex.dev/database/document-ids) between documents
+- [Authenticate & manage users](https://docs.convex.dev/auth)
+- [Paginate](https://docs.convex.dev/database/pagination) query results
+- Retrieve documents with [text](https://docs.convex.dev/text-search) or [vector](https://docs.convex.dev/vector-search) search
+- [Schedule](https://docs.convex.dev/scheduling) function runs
+- [Store and manage files](https://docs.convex.dev/file-storage)
+- Build [AI apps](https://stack.convex.dev/tag/AI)
 
 ---
 
