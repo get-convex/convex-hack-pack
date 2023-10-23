@@ -56,10 +56,10 @@ This repository is your starting point for getting hacking with Convex. It inclu
 - Download a local copy of this repository from Github using `git`:
 
   ```
-  git clone https://github.com/vakila/convex-hack-pack.git
+  git clone https://github.com/get-convex/convex-hack-pack.git
   ```
 
-  (Note: if you prefer, you can also clone the repo with the [Github CLI](https://cli.github.com/) or [download a ZIP file](https://github.com/vakila/convex-hack-pack/archive/refs/heads/main.zip) of the contents)
+  (Note: if you prefer, you can also clone the repo with the [Github CLI](https://cli.github.com/) or [download a ZIP file](https://github.com/get-convex/convex-hack-pack/archive/refs/heads/main.zip) of the contents)
 
 - Install the project dependencies:
 
