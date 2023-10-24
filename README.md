@@ -75,7 +75,9 @@ This repository is your starting point for getting hacking with Convex. It inclu
   ```
 
 - You should see the demo app automatically open in your web browser (if not, navigate to [localhost:5173](http://localhost:5173))
-- In the demo app, type in a new app idea and click "Save", and click the "Generate a random app idea" button, and you should see the ideas appear!
+- In the demo app, type in a new app idea and click "Save", and/or click the "Generate a random app idea" button, and you should see the ideas appear!
+
+You may have noticed that "Include random ideas" checkbox in the demo app doesn't work! Don't worry, we're going to fix it. But before we do, let's take a closer look at our data in the Convex dashboard.
 
 ---
 
@@ -93,9 +95,9 @@ This repository is your starting point for getting hacking with Convex. It inclu
   - Click "Save" to save the new document
   - In both the dashboard and the demo app, you should now see your new idea!
 
-## Exercise 2: Update your backend
+But we're not done yet - that "Include random ideas" checkbox in our app still doesn't work! Let's fix that.
 
-The "Include random ideas" checkbox in the demo app doesn't work! Let's fix that.
+## Exercise 2: Update your backend
 
 - Update your `listIdeas` function:
 
@@ -108,7 +110,7 @@ The "Include random ideas" checkbox in the demo app doesn't work! Let's fix that
     },
     ```
 
-  - In the `handler` function, add an `if` conditional based on the value of `args.includeRandom`: if true, return the same query results as before, but if false, return results filtered by the value of the `random` field, like so:
+  - In the `handler` function, add an `if` conditional based on the value of `args.includeRandom`: if true, return the same query results as before, but if false, filter the data to only return documents where the `random` field is _not_ equal to `true`, like so:
 
     ```js
     handler: async (ctx, args) => {
@@ -130,9 +132,12 @@ The "Include random ideas" checkbox in the demo app doesn't work! Let's fix that
   - Click the "Run function" button to try out your new function in the dashboard
   - In the "Arguments" panel, edit the value of `includeRandom` and verify that you see the correct results in the "Query outcome" panel!
 
-## Exercise 3: Update your frontend
+Great, we've confirmed in the Convex dashboard that our backend change was successful!
 
-Oh no, we broke the frontend! Now that we changed the `listIdeas` function, when visiting [localhost:5173](http://localhost:5173) you'll see a whole lot of nothing. Let's fix it and get our ideas back!
+But now when visiting [localhost:5173](http://localhost:5173) you'll see a whole lot of nothing.
+That's because our backend function change broke the frontend code that invokes that function! Let's fix it and get our ideas back.
+
+## Exercise 3: Update your frontend
 
 - In your code editor, open `src/App.tsx`
 - In the `App` function, find the line near the top where `ideas` is defined using the `useQuery()` hook to call the `api.myFunctions.listIdeas` query function
