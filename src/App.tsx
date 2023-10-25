@@ -70,7 +70,7 @@ function App() {
           ))}
         </ul>
       </main>
-      <footer className="text-center text-xs mb-5 absolute bottom-0 w-full">
+      <footer className="text-center text-xs mb-5 mt-10 w-full">
         <p>
           Built with <a href="https://convex.dev">Convex</a>,{" "}
           <a href="https://www.typescriptlang.org">TypeScript</a>,{" "}
