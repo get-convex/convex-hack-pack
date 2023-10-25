@@ -32,8 +32,13 @@ function App() {
           />
           <Button
             disabled={!newIdea}
+            title={
+              newIdea
+                ? "Save your idea to the database"
+                : "You must enter an idea first"
+            }
             onClick={async () => {
-              await saveIdea({ idea: newIdea, random: false });
+              await saveIdea({ idea: newIdea.trim(), random: false });
               setNewIdea("");
             }}
             className="min-w-fit"
@@ -47,11 +52,15 @@ function App() {
             onClick={async () => {
               await generateIdea();
             }}
+            title="Save a randomly generated app idea to the database"
           >
             Generate a random app idea
           </Button>
 
-          <div className="flex gap-2">
+          <div
+            className="flex gap-2"
+            title="Uh oh, this checkbox doesn't work! Until we fix it ;)"
+          >
             <Checkbox
               id="show-random"
               checked={includeRandom}
