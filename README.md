@@ -171,6 +171,63 @@ code that invokes that function! Let's fix it and get our ideas back.
 - Now, not only are the ideas displaying properly, but when you (un)check the
   "Include random ideas" checkbox you should see the results update accordingly!
 
+## Bonus: Challenge Exercises
+
+If you've got extra time, try your hand at implementing some new features for
+the app!
+
+### Challenge 1: Delete idea button
+
+Currently, there is no way for a user to delete an idea from the page. Your
+challenge is to add a button that fixes that!
+
+Hints:
+
+- In `convex/myFunctions.ts` you'll need to create a new mutation function
+  `deleteIdea`, which
+  [deletes a document](https://docs.convex.dev/database/writing-data#deleting-documents)
+  from the `ideas` table using its
+  [Convex document ID](https://docs.convex.dev/database/document-ids)
+- In `src/App.tsx`, you'll need the `useMutation` hook to invoke your new
+  `deleteIdea` function as needed from the frontend
+- In `src/App.tsx`, you can add a new button using the `Button` component (see
+  the "Generate a random app idea" button for an example)
+
+### Challenge 2: Prevent duplicates
+
+At the moment, the app doesn't prevent you from adding the same idea twice (try
+it!), so we might save duplicate ideas to the database. Your challenge is to fix
+that by making sure that we check for duplicates before saving a new idea!
+
+Hints:
+
+- In `convex/myFunctions.ts`, you can modify the `saveIdea` function to check
+  for duplicates by performing a
+  [filtered query](https://docs.convex.dev/database/reading-data#equality-conditions)
+  before inserting the new document. If the query finds any documents whose
+  `idea` field exactly matches the new idea, do not insert the new document
+- To let users know what's happening, you probably want to treat the
+  did-not-save-duplicate case as an
+  [application error](https://docs.convex.dev/functions/error-handling/application-errors)
+  and handle it in the frontend accordingly
+
+### Challenge 3: Pagination
+
+As the list of ideas grows, the page will get very long! Improve performance by
+paginating the list of ideas to show only 20 ideas at a time, and let users page
+through the rest of the results.
+
+Hints:
+
+- In `convex/myFunctions.ts`, you can change the `listIdeas` query function to a
+  [paginated query](https://docs.convex.dev/database/pagination) function by
+  accepting a `paginationOpts` argument
+- In `src/App.tsx` you'll also need to update the frontend code to use the
+  [`usePaginatedQuery` hook](https://docs.convex.dev/database/pagination#paginating-within-react-components)
+  instead of the `useQuery` hook when invoking the `listIdeas` function
+- Don't forget to add some buttons or another way for users to access the
+  next/previous page(s)!
+
 ---
 
 # Next steps
