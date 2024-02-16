@@ -26,5 +26,5 @@ export default defineSchema(
   //     that are causing the error.
   //  2. Change this option to `false` and make changes to the data
   //     freely, ignoring the schema. Don't forget to change back to `true`!
-  { schemaValidation: true }
+  { schemaValidation: true },
 );

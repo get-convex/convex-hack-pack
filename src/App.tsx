@@ -1,18 +1,18 @@
-import { useAction, useMutation, useQuery } from "convex/react"
-import { api } from "../convex/_generated/api"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Label } from "@/components/ui/label"
+import { useAction, useMutation, useQuery } from "convex/react";
+import { api } from "../convex/_generated/api";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 function App() {
-  const [newIdea, setNewIdea] = useState("")
-  const [includeRandom, setIncludeRandom] = useState(true)
+  const [newIdea, setNewIdea] = useState("");
+  const [includeRandom, setIncludeRandom] = useState(true);
 
-  const ideas = useQuery(api.myFunctions.listIdeas)
-  const saveIdea = useMutation(api.myFunctions.saveIdea)
-  const generateIdea = useAction(api.myFunctions.fetchRandomIdea)
+  const ideas = useQuery(api.myFunctions.listIdeas);
+  const saveIdea = useMutation(api.myFunctions.saveIdea);
+  const generateIdea = useAction(api.myFunctions.fetchRandomIdea);
 
   return (
     <>
@@ -23,7 +23,7 @@ function App() {
 
         <h2 className="text-center">Let's brainstorm apps to build!</h2>
 
-        <div className="flex gap-2">
+        <form className="flex gap-2">
           <Input
             type="text"
             value={newIdea}
@@ -31,26 +31,28 @@ function App() {
             placeholder="Type your app idea here"
           />
           <Button
+            type="submit"
             disabled={!newIdea}
             title={
               newIdea
                 ? "Save your idea to the database"
                 : "You must enter an idea first"
             }
-            onClick={async () => {
-              await saveIdea({ idea: newIdea.trim(), random: false })
-              setNewIdea("")
+            onClick={async (e) => {
+              e.preventDefault();
+              await saveIdea({ idea: newIdea.trim(), random: false });
+              setNewIdea("");
             }}
             className="min-w-fit"
           >
             Save idea
           </Button>
-        </div>
+        </form>
 
         <div className="flex justify-between items-center">
           <Button
             onClick={async () => {
-              await generateIdea()
+              await generateIdea();
             }}
             title="Save a randomly generated app idea to the database"
           >
@@ -94,7 +96,7 @@ function App() {
         </p>
       </footer>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

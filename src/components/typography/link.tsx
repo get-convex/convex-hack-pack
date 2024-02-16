@@ -6,5 +6,5 @@ export const Link = se<
   AnchorHTMLAttributes<HTMLAnchorElement>
 >(
   "a",
-  "font-medium text-primary underline underline-offset-4 hover:no-underline"
+  "font-medium text-primary underline underline-offset-4 hover:no-underline",
 );
