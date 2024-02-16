@@ -23,7 +23,7 @@ function App() {
 
         <h2 className="text-center">Let's brainstorm apps to build!</h2>
 
-        <div className="flex gap-2">
+        <form className="flex gap-2">
           <Input
             type="text"
             value={newIdea}
@@ -31,13 +31,15 @@ function App() {
             placeholder="Type your app idea here"
           />
           <Button
+            type="submit"
             disabled={!newIdea}
             title={
               newIdea
                 ? "Save your idea to the database"
                 : "You must enter an idea first"
             }
-            onClick={async () => {
+            onClick={async (e) => {
+              e.preventDefault()
               await saveIdea({ idea: newIdea.trim(), random: false })
               setNewIdea("")
             }}
@@ -45,7 +47,7 @@ function App() {
           >
             Save idea
           </Button>
-        </div>
+        </form>
 
         <div className="flex justify-between items-center">
           <Button
