@@ -166,7 +166,7 @@ code that invokes that function! Let's fix it and get our ideas back.
   that matches the `args` validator of the given query function. Update the call
   to `useQuery()` to pass `{ includeRandom }` as the second argument, like so:
   ```js
-  const ideas = useQuery(api.myFunctions.listIdeas, { includeRandom })
+  const ideas = useQuery(api.myFunctions.listIdeas, { includeRandom });
   ```
 - Now, not only are the ideas displaying properly, but when you (un)check the
   "Include random ideas" checkbox you should see the results update accordingly!

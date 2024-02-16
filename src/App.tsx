@@ -1,18 +1,18 @@
-import { useAction, useMutation, useQuery } from "convex/react"
-import { api } from "../convex/_generated/api"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Label } from "@/components/ui/label"
+import { useAction, useMutation, useQuery } from "convex/react";
+import { api } from "../convex/_generated/api";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 function App() {
-  const [newIdea, setNewIdea] = useState("")
-  const [includeRandom, setIncludeRandom] = useState(true)
+  const [newIdea, setNewIdea] = useState("");
+  const [includeRandom, setIncludeRandom] = useState(true);
 
-  const ideas = useQuery(api.myFunctions.listIdeas)
-  const saveIdea = useMutation(api.myFunctions.saveIdea)
-  const generateIdea = useAction(api.myFunctions.fetchRandomIdea)
+  const ideas = useQuery(api.myFunctions.listIdeas);
+  const saveIdea = useMutation(api.myFunctions.saveIdea);
+  const generateIdea = useAction(api.myFunctions.fetchRandomIdea);
 
   return (
     <>
@@ -39,9 +39,9 @@ function App() {
                 : "You must enter an idea first"
             }
             onClick={async (e) => {
-              e.preventDefault()
-              await saveIdea({ idea: newIdea.trim(), random: false })
-              setNewIdea("")
+              e.preventDefault();
+              await saveIdea({ idea: newIdea.trim(), random: false });
+              setNewIdea("");
             }}
             className="min-w-fit"
           >
@@ -52,7 +52,7 @@ function App() {
         <div className="flex justify-between items-center">
           <Button
             onClick={async () => {
-              await generateIdea()
+              await generateIdea();
             }}
             title="Save a randomly generated app idea to the database"
           >
@@ -96,7 +96,7 @@ function App() {
         </p>
       </footer>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
