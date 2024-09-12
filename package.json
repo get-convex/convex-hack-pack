@@ -21,7 +21,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cmdk": "^0.2.1",
-    "convex": "^1.9.0",
+    "convex": "^1.16.0",
     "date-fns": "^3.3.1",
     "react": "^18.2.0",
     "react-day-picker": "^8.10.0",
