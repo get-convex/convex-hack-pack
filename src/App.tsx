@@ -68,7 +68,13 @@ function App() {
               checked={includeRandom}
               onCheckedChange={() => setIncludeRandom(!includeRandom)}
             />
-            <Label htmlFor="show-random">Include random ideas</Label>
+            <Label htmlFor="show-random">
+              Include random ideas
+              <br />
+              <span className="text-[16px] font-mono">
+                [TODO: see exercise in README]
+              </span>
+            </Label>
           </div>
         </div>
 
